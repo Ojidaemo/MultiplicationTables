@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct MultiplicationTablesApp: App {
+    @StateObject private var appState = AppState()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SettingsView()
+                .environmentObject(appState)
         }
     }
 }
