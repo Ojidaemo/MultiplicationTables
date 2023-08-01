@@ -13,16 +13,10 @@ struct ContentView: View {
     @State private var roundQuestion = ""
     @State private var correctAnswer = 0
     @State private var tappedButton = -1
+    @State private var answersArray: [Int] = []
     @Binding var chosenQuestionsNumber: Int
     @Binding var chosenNumberToPractise: Int
     
-//    var answersArray: [Int] {
-//            let answers = [correctAnswer, correctAnswer + 2, correctAnswer + 4, correctAnswer - 2]
-//            return answers.shuffled()
-//    }
-    
-        @State private var answersArray: [Int] = []
-
     // for alert
     @State private var showingScore = false
     @State private var scoreTitle = ""
@@ -61,7 +55,6 @@ struct ContentView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 20))
                             .scaleEffect(tappedButton == -1 || tappedButton == number ? 1.0 : 0.75)
                             .animation(.default, value: tappedButton)
-
                         }
                     }
                     Spacer()
