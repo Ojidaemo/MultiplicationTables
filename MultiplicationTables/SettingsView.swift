@@ -12,31 +12,49 @@ struct SettingsView: View {
     @State private var showAlert = false
     @State var chosenQuestionsNumber = 0
     @State var chosenNumberToPractise = 0
-
+    @State private var numberToPracticeLabelText = "Not selected"
+    
+    
     let numberOfquestions = [5, 10, 15]
     
     var body: some View {
-        NavigationStack {
-                    Form {
-                        Section {
-                            Picker("Choose number to practice", selection: $chosenNumberToPractise) {
-                                ForEach(2..<12) {
-                                    Text("\($0)")
+        
+        NavigationView {
+            
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [.black, .blue, .white]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                    .ignoresSafeArea()
+                VStack {
+                    Text("Multiplication Table")
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                    Spacer()
+                    VStack(spacing: 20) {
+                        
+                        Section(header: Text("Select number to practice").foregroundColor(.white)) {
+                            Menu {
+                                Picker("", selection: $chosenNumberToPractise) {
+                                    ForEach(2..<12) {
+                                        Text("\($0)")
+                                    }
                                 }
+                            } label: {
+                                Text("\(chosenNumberToPractise == 0 ? "Not selected" : "\(chosenNumberToPractise + 2)")")
                             }
                         }
-                        Section {
-                            Picker("Choose number of questions", selection: $chosenQuestionsNumber) {
+                        .foregroundColor(.yellow)
+                        Section(header: Text("Select number of questions").foregroundColor(.white)) {
+                            Picker("", selection: $chosenQuestionsNumber) {
                                 ForEach(numberOfquestions, id: \.self) {
                                     Text($0, format: .number)
                                 }
                             }
                             .pickerStyle(.segmented)
-                        } header: {
-                            Text("Choose number of questions")
                         }
                     }
-            .navigationTitle("Multiplication Tables")
+                    Spacer()
+                }
+            }
             .toolbar {
                 Button("Start") {
                     //transition to game
@@ -46,13 +64,14 @@ struct SettingsView: View {
                         showAlert = true
                     }
                 }
+                .buttonStyle(.bordered)
             }
-                .alert("Choose number to practise and number of rounds", isPresented: $showAlert) {
-                    Button("Ok", role: .cancel) { }
-                }
-        }
-        .fullScreenCover(isPresented: $isGameStarted) {
-            ContentView(chosenQuestionsNumber: $chosenQuestionsNumber, chosenNumberToPractise: $chosenNumberToPractise)
+            .alert("Choose number to practise and number of rounds", isPresented: $showAlert) {
+                Button("Ok", role: .cancel) { }
+            }
+            .fullScreenCover(isPresented: $isGameStarted) {
+                ContentView(chosenQuestionsNumber: $chosenQuestionsNumber, chosenNumberToPractise: $chosenNumberToPractise)
+            }
         }
     }
 }

@@ -28,39 +28,53 @@ struct ContentView: View {
     @State private var isNewGamePressed = false
     
     var body: some View {
-            NavigationStack {
-                Text("Questions left: \(chosenQuestionsNumber)")
-                    .foregroundColor(.gray)
-                Spacer()
-                Text("\(roundQuestion)").font(.title).bold()
-                Spacer()
-                Spacer()
-                VStack(spacing: 15) {
-                    Text("What is the correct answer?")
-                        .font(.title2)
-                    ForEach(answersArray, id: \.self) { number in
-                        Button("\(number)") {
-                            buttonTapped(number)
+        NavigationStack {
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [.black, .blue, .white]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                    .ignoresSafeArea()
+                VStack {
+                    Text("Multiplication Table")
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
+                    Text("Questions left: \(chosenQuestionsNumber)")
+                        .foregroundColor(.gray)
+                        .padding(.top, -10)
+                    Spacer()
+                    Text("\(roundQuestion)").font(.title).bold()
+                        .foregroundColor(.white)
+                    Spacer()
+                    VStack(spacing: 15) {
+                        Text("What is the correct answer?")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                        ForEach(answersArray, id: \.self) { number in
+                            Button("\(number)") {
+                                buttonTapped(number)
+                            }
+                            .frame(width: 150, height: 20)
+                            .foregroundColor(.white)
+                            .padding(.vertical, 20)
+                            .background(.ultraThinMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
                         }
-                        .frame(width: 150, height: 20)
-                        .padding(.vertical, 20)
-                        .background(.ultraThinMaterial)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
                     }
+                    Spacer()
+                    Text("Score \(score)")
+                        .font(.title)
+                        .padding(.bottom, 20)
+                        .foregroundColor(.white)
                 }
-                .navigationTitle("Multiplication Tables")
-                .toolbar {
-                    Button("New game") {
-                        isNewGamePressed = true
-                    }
+            }
+            .toolbar {
+                Button("New game") {
+                    isNewGamePressed = true
                 }
-                Spacer()
-                Text("Score \(score)")
-                    .font(.title)
+                .buttonStyle(.bordered)
             }
-            .fullScreenCover(isPresented: $isNewGamePressed) {
-                SettingsView()
-            }
+        }
+        .fullScreenCover(isPresented: $isNewGamePressed) {
+            SettingsView()
+        }
         .onAppear(perform: generateQuestion)
         .alert(scoreTitle, isPresented: $showingScore) {
             if gameOver {

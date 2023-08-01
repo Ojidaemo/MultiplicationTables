@@ -13,6 +13,7 @@
 		8763703A2A73D2B30096C11A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 876370392A73D2B30096C11A /* Preview Assets.xcassets */; };
 		876370452A73DE540096C11A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876370442A73DE540096C11A /* SettingsView.swift */; };
 		876370472A73F46B0096C11A /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876370462A73F46B0096C11A /* AppState.swift */; };
+		876370492A7817D80096C11A /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876370482A7817D80096C11A /* View+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		876370392A73D2B30096C11A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		876370442A73DE540096C11A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		876370462A73F46B0096C11A /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		876370482A7817D80096C11A /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				876370322A73D2B20096C11A /* MultiplicationTablesApp.swift */,
 				876370342A73D2B20096C11A /* ContentView.swift */,
 				876370442A73DE540096C11A /* SettingsView.swift */,
+				876370482A7817D80096C11A /* View+Ext.swift */,
 				876370462A73F46B0096C11A /* AppState.swift */,
 				876370362A73D2B30096C11A /* Assets.xcassets */,
 				876370382A73D2B30096C11A /* Preview Content */,
@@ -145,6 +148,7 @@
 			files = (
 				876370452A73DE540096C11A /* SettingsView.swift in Sources */,
 				876370472A73F46B0096C11A /* AppState.swift in Sources */,
+				876370492A7817D80096C11A /* View+Ext.swift in Sources */,
 				876370352A73D2B20096C11A /* ContentView.swift in Sources */,
 				876370332A73D2B20096C11A /* MultiplicationTablesApp.swift in Sources */,
 			);
