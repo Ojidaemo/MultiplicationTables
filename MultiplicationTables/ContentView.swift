@@ -12,14 +12,17 @@ struct ContentView: View {
     @State private var score = 0
     @State private var roundQuestion = ""
     @State private var correctAnswer = 0
+    @State private var tappedButton = -1
     @Binding var chosenQuestionsNumber: Int
     @Binding var chosenNumberToPractise: Int
     
-    var answersArray: [Int] {
-        let answers = [correctAnswer, correctAnswer + 2, correctAnswer + 4, correctAnswer - 2]
-        return answers.shuffled()
-    }
+//    var answersArray: [Int] {
+//            let answers = [correctAnswer, correctAnswer + 2, correctAnswer + 4, correctAnswer - 2]
+//            return answers.shuffled()
+//    }
     
+        @State private var answersArray: [Int] = []
+
     // for alert
     @State private var showingScore = false
     @State private var scoreTitle = ""
@@ -56,6 +59,9 @@ struct ContentView: View {
                             .padding(.vertical, 20)
                             .background(.ultraThinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .scaleEffect(tappedButton == -1 || tappedButton == number ? 1.0 : 0.75)
+                            .animation(.default, value: tappedButton)
+
                         }
                     }
                     Spacer()
@@ -95,10 +101,13 @@ struct ContentView: View {
         let rightSideOperand = Int.random(in: 1...10)
         roundQuestion = "\(chosenNumberToPractise + 2) x \(rightSideOperand) = ???"
         correctAnswer = (chosenNumberToPractise + 2) * rightSideOperand
+        answersArray = [correctAnswer, correctAnswer + 2, correctAnswer + 4, correctAnswer - 2]
+        answersArray.shuffle()
     }
     
     func buttonTapped(_ number: Int) {
         chosenQuestionsNumber -= 1
+        tappedButton = number
         if number == correctAnswer {
             scoreTitle = "Correct"
             score += 1
@@ -108,7 +117,9 @@ struct ContentView: View {
         if chosenQuestionsNumber == 0 {
             gameOver = true
         }
-        showingScore = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            showingScore = true
+        }
     }
     
     func resetGame() {
